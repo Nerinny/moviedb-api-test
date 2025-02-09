@@ -22,7 +22,7 @@ jobs:
       run: docker run --rm -v ${{ github.workspace }}/reports:/apitests/reports -e BEARER_TOKEN=$BEARER_TOKEN moviedb-api-test:latest
 
     - name: Upload HTML report
-      uses: actions/upload-artifact@4
+      uses: actions/upload-artifact@v4
       with:
         name: Test Report
         path: reports/report.html
