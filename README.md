@@ -37,7 +37,8 @@ THEN endpoint return response 401
 WHEN user sends request to add rating  
 THEN endpoint returns response 401
 
-Scenario: Check invalid rating responses
+Scenario: Check invalid rating responses  
+  
 4. GIVEN user sets rating as 0  
 WHEN user sends request to add rating  
 THEN endpoint returns response 400  
@@ -55,25 +56,29 @@ WHEN user sends request to add rating
 THEN endpoint returns response 400  
 AND status message about rating being too high
 
-Scenario: Check sending request with wrong parameters
+Scenario: Check sending request with wrong parameters  
+  
 7. GIVEN user sets wrong parameters  
 WHEN user sends request to add rating  
 THEN endpoint returns response 400  
 AND status message about invalid parameters  
 
-Scenario: Check updating rating of a movie
+Scenario: Check updating rating of a movie  
+  
 8. GIVEN user already rated the movie  
 WHEN user sends request to add rating to the same movie  
 THEN endpoint returns response 201  
 AND status message about successful update  
 
-Scenario: Check rating movie that doesn't exist in db
+Scenario: Check rating movie that doesn't exist in db  
+
 9. GIVEN user sets ID of movie that doesn't exist in db  
 WHEN user sends request to add rating  
 THEN endpoint returns response 404  
 AND status message about resource not found
 
 Scenario: Check rating movie with wrong ID
+
 10. GIVEN user sets ID of movie as 0  
 WHEN user sends request to add rating  
 THEN endpoint returns response 404  
@@ -92,12 +97,14 @@ THEN endpoint returns response 404
 AND status message about invalid ID
 
 Scenario: Check schema of response of rating movie
+
 13. GIVEN user sets proper parameters  
 WHEN user sends request to add rating  
 THEN endpoint returns response that fits specified schema
 
 ### Feature: Get top rated movies endpoint
 Scenario: Check access status codes
+
 1. GIVEN user has valid bearer token  
 WHEN user sends request to get top movies   
 THEN endpoint returns response 201 
@@ -113,6 +120,7 @@ WHEN user sends request to get top movies
 THEN endpoint returns response 401
 
 Scenario: Check defaulting to english language
+
 4. GIVEN user sets invalid language in parameter
 WHEN user sends request to get top movies    
 THEN endpoint returns response 200  
@@ -120,6 +128,7 @@ AND movie title in response is in english
 AND movie overview in response is in english
 
 Scenario: Check different language parameter
+
 5. GIVEN user sets Polish language in parameter
 WHEN user sends request to get top movies     
 THEN endpoint returns response 200  
@@ -138,16 +147,19 @@ THEN endpoint returns response 200
 AND movie overview in response is in Dutch
 
 Scenario: Check non existent API endpoint
+
 8. GIVEN user has wrong endpoint url  
 WHEN user sends request     
 THEN endpoint returns response 404
 
 Scenario: Check omitting required parameters
+
 9. GIVEN user omits required parameters  
 WHEN user sends request to get top movies     
 THEN endpoint returns response 400 or 401
 
 Scenario: Check pagination
+
 10. GIVEN user sets page parameter to 1  
 WHEN user sends request to get top movies     
 THEN endpoint returns response 200  
@@ -169,6 +181,7 @@ AND page number in response is 100
 AND number of total pages in response in more than 1  
 
 Scenario: Check invalid page parameter
+
 13. GIVEN user sets page parameter to 0  
 WHEN user sends request to get top movies     
 THEN endpoint returns response 400
@@ -187,6 +200,7 @@ THEN endpoint returns response 400
 AND status message about invalid page number
 
 Scenario: Check schema of response of getting top movies
+
 13. GIVEN user sets proper parameters  
 WHEN user sends request to get top movies   
 THEN endpoint returns response that fits specified schema
