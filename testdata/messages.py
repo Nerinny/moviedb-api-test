@@ -1,0 +1,7 @@
+INVALID_PAGE_MESSAGE = "Invalid page: Pages start at 1 and max at 500. They are expected to be an integer."
+TOO_HIGH_RATING_MESSAGE = "Value too high: Value must be less than, or equal to 10.0."
+TOO_LOW_RATING_MESSAGE = "Value too low: Value must be greater than 0.0."
+INVALID_PARAMS = "Invalid parameters: Your request parameters are incorrect."
+UPDATED_SUCCESS = "The item/record was updated successfully."
+RESOURCE_NOT_FOUND = "The resource you requested could not be found."
+INVALID_ID = "Invalid id: The pre-requisite id is invalid or not found."
