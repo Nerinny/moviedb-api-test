@@ -35,7 +35,7 @@ def test_defaulting_to_en_language():
     ('nl-NL', 'nl'),
 ])
 def test_language_parameter(language_param, expected_language):
-    """Test wrong language set in parameter - defaults to en-US."""
+    """Test language set in parameter and overview language in response."""
     params = {"language": language_param}
     response = get_top_rated_movies(params=params)
     assert response.status_code == 200, f"Expected 200, got {response.status_code}"
