@@ -1,0 +1,22 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag moviedb-api-test:$(date +%s) --tag  moviedb-api-test:latest
+    - name: Run the Docker image
+      env:
+        BEARER_TOKEN: ${{ secrets.BEARER_TOKEN }}
+      run: docker run --rm -e BEARER_TOKEN=$BEARER_TOKEN moviedb-api-test:latest
