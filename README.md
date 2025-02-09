@@ -201,7 +201,7 @@ AND status message about invalid page number
 
 Scenario: Check schema of response of getting top movies
 
-13. GIVEN user sets proper parameters  
+16. GIVEN user sets proper parameters  
 WHEN user sends request to get top movies   
 THEN endpoint returns response that fits specified schema
 
