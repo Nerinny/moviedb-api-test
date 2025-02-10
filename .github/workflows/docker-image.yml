@@ -26,3 +26,33 @@ jobs:
       with:
         name: Test Report
         path: reports/report.html
+
+  performance:
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        scenario: [staggered, burst, normal]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install Locust
+        run: |
+          python -m pip install --upgrade pip
+          pip install locust
+
+      - name: Run Locust performance tests
+        run: |
+          locust -f performance/locustfile.py --headless --scenario=${{ matrix.scenario }} --only-summary --csv=locust/log
+
+      - name: Upload performance results
+        uses: actions/upload-artifact@v4
+        with:
+          name: Performance Tests results
+          path: locust
