@@ -48,6 +48,8 @@ jobs:
           pip install locust
 
       - name: Run Locust performance tests
+        env:
+          BEARER_TOKEN: ${{ secrets.BEARER_TOKEN }}
         run: |
           locust -f performance/locustfile.py --headless --run-time 1m --scenario=${{ matrix.scenario }} --only-summary --csv=locust/log
 
