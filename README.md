@@ -2,6 +2,7 @@
 API tests of get top rated movies and rate movie endpoints. Done with Python, Pytest and Requests. Includes Dockerfile and GH actions pipeline with HTML report.
 ## Running solution in GH
 - GH Actions pipeline is available in Actions tab of repository, it runs docker container and generates HTML report which is available in run artifacts. Bearer token is saved as GH secret.
+- GH Actions pipeline has separate jobs for locust performance tests. They run in three modes for a minute and each produces csv results attached to run artifacts. Locust tests reuse helper fucntions and again bearer token is saved as GH secret.
 ## Running solution locally
 - Clone repository locally
 - Generate bearer token for your [Movie DB developer](https://developer.themoviedb.org/)
@@ -9,6 +10,8 @@ API tests of get top rated movies and rate movie endpoints. Done with Python, Py
 ```docker build . --file Dockerfile --tag moviedb-api-test:latest```
 - Run docker and set variable `BEARER_TOKEN`:
 ```docker run --rm -e BEARER_TOKEN=<your_bearer_token_here> moviedb-api-test:latest```
+- Run performance tests with the same `BEARER_TOKEN` as local env variable. You can specify one of performance scenarios (burst, staggered, normal) as a scenario argument.
+```locust -f performance/locustfile.py --scenario=burst --headless --run-time 1m --only-summary --csv=locust/locust_log```
 ## Structure of solution
 - **.github/workflows/docker-image.yml** - GH workflow configuration
 - **config.ini** - configuration file with endpoints
@@ -20,6 +23,8 @@ API tests of get top rated movies and rate movie endpoints. Done with Python, Py
 - **testdata/response_schema** - schemas for responses for assertions
 - **tests/test_add_rating_endpoint** - tests for add movie rating endpoint
 - **tests/test_top_rated_endpoint** - tests for top rated movies endpoint
+- **perfrormance/locustfile.py** - performance tests for top rated movies endpoint
+
 ## Test scenarios
 ### Feature: Add rating endpoint
 Scenario: Check access status codes
