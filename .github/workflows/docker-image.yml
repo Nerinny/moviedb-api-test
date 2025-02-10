@@ -49,7 +49,7 @@ jobs:
 
       - name: Run Locust performance tests
         run: |
-          locust -f performance/locustfile.py --headless --scenario=${{ matrix.scenario }} --only-summary --csv=locust/log
+          locust -f performance/locustfile.py --headless --run-time 1m --scenario=${{ matrix.scenario }} --only-summary --csv=locust/log
 
       - name: Upload performance results
         uses: actions/upload-artifact@v4
