@@ -1,5 +1,6 @@
 # API tests for Movie DB endpoints
 API tests of get top rated movies and rate movie endpoints. Done with Python, Pytest and Requests. Includes Dockerfile and GH actions pipeline with HTML report.
+Performance basic tests in Locust in separate jobs in GH pipeline with csv report.
 ## Running solution in GH
 - GH Actions pipeline is available in Actions tab of repository, it runs docker container and generates HTML report which is available in run artifacts. Bearer token is saved as GH secret.
 - GH Actions pipeline has separate jobs for locust performance tests. They run in three modes for a minute and each produces csv results attached to run artifacts. Locust tests reuse helper fucntions and again bearer token is saved as GH secret.
